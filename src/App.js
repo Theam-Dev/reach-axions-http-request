@@ -4,37 +4,41 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class PostList extends React.Component {
   state = {
-    posts: []
+    users : []
   }
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    axios.get("https://jsonplaceholder.typicode.com/users")
       .then(res => {
-        const posts = res.data;
-        this.setState({ posts });
+        const users = res.data;
+        this.setState({ users });
       })
   }
   render() {
     return (
       <div>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-          <div class="container">
-            <a class="navbar-brand" href="#">Tutorail Sharing</a>
+        <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+          <div className="container">
+            <a className="navbar-brand" href="#">Tutorail Sharing</a>
           </div>
         </nav>
-        <div class="container">
+        <div className="container">
           <table className="table table-bordered">
+            <thead>
             <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Body</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
             </tr>
-            {this.state.posts.map((post) => (
-              <tr>
-                <td>{post.id}</td>
-                <td>{post.title}</td>
-                <td>{post.body}</td>
+            </thead>
+           <tbody>
+           {this.state.users.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
               </tr>
             ))}
+           </tbody>
           </table>
         </div>
       </div>
